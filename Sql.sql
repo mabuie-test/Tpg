@@ -1,10 +1,7 @@
--- 1. Criação da base de dados (caso ainda não exista)
-CREATE DATABASE IF NOT EXISTS empresa_db
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
-USE empresa_db;
+-- Certifique‑se de que está a usar a base philaded_Philaseanproviderwebsite:
+USE philaded_Philaseanproviderwebsite;
 
--- 2. Tabela de utilizadores
+-- 1. Tabela de utilizadores
 CREATE TABLE IF NOT EXISTS users (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   nome VARCHAR(100) NOT NULL,
@@ -18,13 +15,12 @@ CREATE TABLE IF NOT EXISTS users (
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_unicode_ci;
 
--- 3. Tabela de pedidos
+-- 2. Tabela de pedidos
 CREATE TABLE IF NOT EXISTS pedidos (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   user_id INT UNSIGNED NOT NULL,
   descricao TEXT NOT NULL,
-  status ENUM('pendente','progresso','concluído') NOT NULL
-    DEFAULT 'pendente',
+  status ENUM('pendente','progresso','concluído') NOT NULL DEFAULT 'pendente',
   criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   atualizado_em DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
