@@ -2,10 +2,27 @@
 // includes/config.php
 
 // === Configuração Base de Dados ===
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'seu_banco');
-define('DB_USER', 'seu_usuario');
-define('DB_PASS', 'sua_senha');
+$host    = 'localhost';
+$dbname  = 'philaded_Philaseanproviderwebsite';
+$user    = 'philaded_Philaseanproviderwebsite';
+$pass    = 'Philaseanproviderwebsite';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_PERSISTENT         => false,
+    ]);
+} catch (PDOException $e) {
+    // Em ambiente de produção, registar o erro noutro local seguro
+    exit('Erro na ligação à base de dados: ' . $e->getMessage());
+}
+
+// Disponibiliza o PDO para as classes
+define('DB_CONNECTION', $pdo);
 
 // === Configuração Email (PHPMailer) ===
 define('MAIL_HOST', 'smtp.seudominio.co.mz');
